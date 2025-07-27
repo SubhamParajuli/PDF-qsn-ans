@@ -43,7 +43,7 @@ def get_vectorstore(txt_chunks):
 # Streamlit UI
 def main():
     st.set_page_config(page_title="Chat with PDFs + Gemini + Web Context", page_icon="📚")
-    st.header("Question your PDFs:")
+    st.header("Pdf Questionare:🗃️")
 
     # Initialize chat history
     if "chat_history" not in st.session_state:
@@ -64,7 +64,7 @@ def main():
                 st.session_state.llm = get_gemini_llm()
                 st.success("✅ Vector store & Gemini model initialized!")
 
-    # 🔁 Handle Q&A
+    # Handle Q&A
     if user_question and "vector_store" in st.session_state and "llm" in st.session_state:
         with st.spinner("Thinking deeply with Gemini..."):
             # Step 1: Similarity search from FAISS
