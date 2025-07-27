@@ -1,8 +1,9 @@
 import streamlit as st
 from dotenv import load_dotenv
 from PyPDF2 import PdfReader
-
+from langchain.text_splitter import CharacterTextSplitter
 import streamlit as st
+import torch
 
 def create_text(pdf_files):
     text=""
@@ -12,7 +13,12 @@ def create_text(pdf_files):
             text+=page.extract_text()
     return text
 
-
+def get_chunks(text):
+    text_splitter=CharacterTextSplitter(
+        seperator='\n',
+        chunk_size=1000,
+        chunk_overlap=200
+    )
 
 
 def main():
@@ -33,6 +39,7 @@ def main():
                 raw_text=create_text(pdf_files)
 
                 #text-> chunks
+                chunks=get_chunks(raw_text)
 
                 #chunks to embedding
 
